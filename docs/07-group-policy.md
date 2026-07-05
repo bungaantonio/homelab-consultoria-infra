@@ -118,3 +118,30 @@ A aplicação segue a hierarquia padrão:
 - Hardening avançado de endpoints (AppLocker / WDAC)
 - Integração com auditoria centralizada
 - Segmentação de GPO por compliance e risco
+
+---
+
+## 9. Rastreamento de GPOs
+
+| ID | GPO | Escopo | Objetivo | Status | Fase |
+|----|-----|--------|----------|--------|------|
+| 1 | Baseline Domain Policy | Domínio | Políticas globais de segurança (palavras-passe, bloqueio de conta, auditoria) | ⬜ Pendente | Fase 1 |
+| 2 | Workstation Baseline | `02_Computers > Workstations` | Padronização de estações (Firewall, Defender, Windows Update, AutoRun, sincronização de hora) | ⬜ Pendente | Fase 1 |
+| 3 | USB Storage Restriction | Workstations | Bloqueio de dispositivos de armazenamento USB | ⬜ Pendente | Fase 1 |
+| 4 | Corporate Wallpaper | Utilizadores | Aplicação de wallpaper institucional | ⬜ Pendente | Fase 1 |
+| 5 | Desktop Restrictions | Utilizadores | Bloqueio de Painel de Controlo, CMD, PowerShell, alteração de wallpaper | ⬜ Pendente | Fase 1 |
+| 6 | Windows Defender Policy | Workstations | Proteção em tempo real, Cloud Protection, atualizações automáticas, scan periódico | ⬜ Pendente | Fase 2 |
+| 7 | Windows Firewall Policy | Workstations e Servers | Firewall ativa, perfis Domain/Public/Private, bloqueio inbound por defeito | ⬜ Pendente | Fase 2 |
+| 8 | Audit Policy | Domain Controllers | Auditoria de logon, logoff, alteração de utilizadores/grupos, criação/eliminação de objetos | ⬜ Pendente | Fase 2 |
+| 9 | Drive Mapping | Utilizadores | Mapeamento automático de drives por departamento (Financeiro F:, Comercial C:, Direção D:) | ⬜ Pendente | Fase 3 |
+| 10 | Printer Deployment | Utilizadores | Distribuição automática de impressoras (via PaperCut) | ⬜ Pendente | Fase 3 |
+| 11 | Local Administrators Management | Workstations | Controlo do grupo local Administrators para evitar administradores não autorizados | ⬜ Pendente | Fase 4 |
+| 12 | Remote Desktop Policy | Servers | Configuração de acesso RDP, NLA obrigatório, firewall | ⬜ Pendente | Fase 4 |
+| 13 | BitLocker | Workstations (opcional) | Criptografia de disco, recuperação de chaves, integração com AD (requer TPM) | ⬜ Pendente | Fase 4 |
+| 14 | LAPS Policy | Workstations | Password única por máquina, rotação automática, armazenamento no AD | ⬜ Pendente | Fase 4 |
+
+### Legenda de Status
+- ⬜ Pendente
+- 🔄 Em Progresso
+- ✅ Concluído
+- ⚠️ Bloqueado/Requer Dependências
