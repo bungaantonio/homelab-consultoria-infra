@@ -1,0 +1,120 @@
+# 07 - Group Policy
+
+## 1. Visão Geral
+
+As Group Policy Objects (GPOs) são o principal mecanismo de controlo de configuração e segurança no ambiente **HomeLab Consultoria & Contabilidade**.
+
+São aplicadas através do domínio gerido por Active Directory, permitindo padronização de configurações, hardening e gestão centralizada de utilizadores e computadores.
+
+---
+
+## 2. Objetivo das GPOs
+
+As GPOs têm como objetivo:
+
+- Garantir consistência de configuração entre dispositivos
+- Aplicar políticas de segurança centralizadas
+- Reduzir intervenção manual em endpoints
+- Controlar ambiente de utilizador por departamento
+- Hardenizar servidores e estações de trabalho
+
+---
+
+## 3. Modelo de Aplicação
+
+As GPOs são aplicadas com base em:
+
+- Estrutura de OUs
+- Grupos de segurança (AGDLP model)
+- Escopo de objetos do domínio
+
+---
+
+## 4. Tipos de GPO no Ambiente
+
+### 4.1 GPO de Utilizador (User Configuration)
+
+Aplicadas na OU `01_Users`.
+
+Exemplos:
+- Configuração de desktop
+- Restrição de acesso a ferramentas do sistema
+- Mapeamento de drives de rede
+- Configuração de impressoras
+
+---
+
+### 4.2 GPO de Computador (Computer Configuration)
+
+Aplicadas na OU `02_Computers`.
+
+Exemplos:
+- Firewall ativado
+- Windows Defender configurado
+- Windows Update automático
+- Hardening de sistema operativo
+
+---
+
+### 4.3 GPO de Servidores
+
+Aplicadas na OU `03_Servers`.
+
+Exemplos:
+- Desativação de serviços desnecessários
+- Auditoria avançada
+- Restrições de acesso remoto
+- Configuração de segurança de rede (SMB, RDP)
+
+---
+
+### 4.4 GPO Administrativa
+
+Aplicadas na OU `00_Admin`.
+
+Exemplos:
+- Restrição de login em estações comuns
+- Políticas de autenticação reforçada
+- Auditoria de ações privilegiadas
+- Controlo de credenciais administrativas
+
+---
+
+## 5. Ordem de Aplicação
+
+A aplicação segue a hierarquia padrão:
+
+1. Local policy
+2. Site (não implementado neste ambiente)
+3. Domain
+4. OU
+5. GPOs linkadas a OUs
+
+---
+
+## 6. Segurança e Boas Práticas
+
+- Evitar GPOs excessivamente globais
+- Preferir GPOs específicas por OU
+- Utilizar grupos de segurança para filtragem
+- Minimizar conflitos entre políticas
+- Testar políticas na OU `Test` antes de produção
+
+---
+
+## 7. Limitações Atuais
+
+- Sem GPO central de baseline unificada
+- Sem Advanced Group Policy Management (AGPM)
+- Sem versionamento avançado de GPOs
+- Estrutura ainda em fase de implementação
+
+---
+
+## 8. Evolução Prevista
+
+- Criação de baseline de segurança corporativa
+- Implementação de políticas de LAPS via GPO
+- Hardening avançado de endpoints (AppLocker / WDAC)
+- Integração com auditoria centralizada
+- Segmentação de GPO por compliance e risco
