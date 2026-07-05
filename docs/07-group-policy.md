@@ -125,23 +125,23 @@ A aplicação segue a hierarquia padrão:
 
 | ID | GPO | Escopo | Objetivo | Status | Fase |
 |----|-----|--------|----------|--------|------|
-| 1 | Baseline Domain Policy | Domínio | Políticas globais de segurança (palavras-passe, bloqueio de conta, auditoria) | ⬜ Pendente | Fase 1 |
-| 2 | Workstation Baseline | `02_Computers > Workstations` | Padronização de estações (Firewall, Defender, Windows Update, AutoRun, sincronização de hora) | ⬜ Pendente | Fase 1 |
-| 3 | USB Storage Restriction | Workstations | Bloqueio de dispositivos de armazenamento USB | ⬜ Pendente | Fase 1 |
-| 4 | Corporate Wallpaper | Utilizadores | Aplicação de wallpaper institucional | ⬜ Pendente | Fase 1 |
-| 5 | Desktop Restrictions | Utilizadores | Bloqueio de Painel de Controlo, CMD, PowerShell, alteração de wallpaper | ⬜ Pendente | Fase 1 |
-| 6 | Windows Defender Policy | Workstations | Proteção em tempo real, Cloud Protection, atualizações automáticas, scan periódico | ⬜ Pendente | Fase 2 |
-| 7 | Windows Firewall Policy | Workstations e Servers | Firewall ativa, perfis Domain/Public/Private, bloqueio inbound por defeito | ⬜ Pendente | Fase 2 |
-| 8 | Audit Policy | Domain Controllers | Auditoria de logon, logoff, alteração de utilizadores/grupos, criação/eliminação de objetos | ⬜ Pendente | Fase 2 |
-| 9 | Drive Mapping | Utilizadores | Mapeamento automático de drives por departamento (Financeiro F:, Comercial C:, Direção D:) | ⬜ Pendente | Fase 3 |
-| 10 | Printer Deployment | Utilizadores | Distribuição automática de impressoras (via PaperCut) | ⬜ Pendente | Fase 3 |
-| 11 | Local Administrators Management | Workstations | Controlo do grupo local Administrators para evitar administradores não autorizados | ⬜ Pendente | Fase 4 |
-| 12 | Remote Desktop Policy | Servers | Configuração de acesso RDP, NLA obrigatório, firewall | ⬜ Pendente | Fase 4 |
-| 13 | BitLocker | Workstations (opcional) | Criptografia de disco, recuperação de chaves, integração com AD (requer TPM) | ⬜ Pendente | Fase 4 |
-| 14 | LAPS Policy | Workstations | Password única por máquina, rotação automática, armazenamento no AD | ⬜ Pendente | Fase 4 |
+| 1 | GPO_Baseline_Domain_Policy | Domínio | Políticas globais de segurança (palavras-passe, bloqueio de conta, auditoria) | Pendente | Fase 1 |
+| 2 | GPO_Workstation_Baseline | `02_Computers > Workstations` | Padronização de estações (Firewall, Defender, Windows Update, AutoRun, sincronização de hora) | Pendente | Fase 1 |
+| 3 | GPO_USB_Storage_Restriction | Workstations | Bloqueio de dispositivos de armazenamento USB | Pendente | Fase 1 |
+| 4 | GPO_Corporate_Wallpaper | Utilizadores | Aplicação de wallpaper institucional | Pendente | Fase 1 |
+| 5 | GPO_Desktop_Restrictions | Utilizadores | Bloqueio de Painel de Controlo, CMD, PowerShell, alteração de wallpaper | Pendente | Fase 1 |
+| 6 | GPO_Windows_Defender_Policy | Workstations | Proteção em tempo real, Cloud Protection, atualizações automáticas, scan periódico | Pendente | Fase 2 |
+| 7 | GPO_Windows_Firewall_Policy | Workstations e Servers | Firewall ativa, perfis Domain/Public/Private, bloqueio inbound por defeito | Pendente | Fase 2 |
+| 8 | GPO_Audit_Policy | Domain Controllers | Auditoria de logon, logoff, alteração de utilizadores/grupos, criação/eliminação de objetos | Pendente | Fase 2 |
+| 9 | GPO_Drive_Mapping | Utilizadores | Mapeamento automático de drives por departamento (Financeiro F:, Comercial C:, Direção D:) | Pendente | Fase 3 |
+| 10 | GPO_Printer_Deployment | Utilizadores | Distribuição automática de impressoras (via PaperCut) | Pendente | Fase 3 |
+| 11 | GPO_Local_Administrators_Management | Workstations | Controlo do grupo local Administrators para evitar administradores não autorizados | Pendente | Fase 4 |
+| 12 | GPO_Remote_Desktop_Policy | Servers | Configuração de acesso RDP, NLA obrigatório, firewall | Pendente | Fase 4 |
+| 13 | GPO_BitLocker | Workstations (opcional) | Criptografia de disco, recuperação de chaves, integração com AD (requer TPM) | Pendente | Fase 4 |
+| 14 | GPO_LAPS_Policy | Workstations | Password única por máquina, rotação automática, armazenamento no AD | Pendente | Fase 4 |
 
 ### Legenda de Status
-- ⬜ Pendente
-- 🔄 Em Progresso
-- ✅ Concluído
-- ⚠️ Bloqueado/Requer Dependências
+- Pendente
+- Em Progresso
+- Concluído
+- Bloqueado/Requer Dependências
