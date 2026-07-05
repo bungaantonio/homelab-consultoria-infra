@@ -56,12 +56,11 @@ lan.homelab.ao
 │   ├── File Servers
 │   └── Print Servers
 │
-├── 04_Service_Accounts
-│   ├── Applications
-│   ├── Infrastructure
-│   └── Automation
-│
-└── 05_Infrastructure_Services
+└── 04_Service_Accounts
+    ├── Applications
+    ├── Infrastructure
+    └── Automation
+
 ```
 ## Serviços Implementados (v0.1)
 * **Routing e Gateway:** Acesso à internet gerido por um único ponto de falha controlado (pfSense).
