@@ -1,228 +1,129 @@
 # DL Design - Domain Local Groups
 
-## Definição de Domain Local Groups
+## Visão Geral
 
-Domain Local Groups são grupos de segurança com scope de domínio que podem conter utilizadores, grupos globais e grupos universais de qualquer domínio da floresta. São utilizados para atribuir permissões a recursos dentro do mesmo domínio.
+Domain Local Groups são grupos de segurança usados para representar autorização sobre recursos específicos.
 
-No modelo AGDLP (Accounts → Global Groups → Domain Local Groups → Permissions), os grupos Domain Local representam a camada de autorização (permissions layer).
+No modelo AGDLP, os DL respondem à pergunta: que recurso ou permissão está a ser entregue?
 
-## Função de Autorização
+---
 
-Grupos Domain Local são utilizados exclusivamente para:
+## Objetivo
 
-- Atribuição de permissões NTFS em file servers
-- Atribuição de permissões de Share em SMB
-- Atribuição de permissões de impressora
-- Controlo de acesso a recursos específicos
+Os DL servem para:
 
-DL groups definem o que pode ser acedido, não quem acede. A identidade do utilizador é gerida pelos grupos globais (GG).
+- Atribuir permissões NTFS em file servers
+- Atribuir permissões SMB/Share
+- Controlar acesso a impressoras ou outros recursos
+- Manter a camada de autorização separada da identidade
 
-## Estrutura de Grupos DL para File Server
+---
 
-### Permissões de Leitura e Escrita (RW)
+## Arquitetura
 
-```
-DL-Files-Financeiro-RW
-DL-Files-Comercial-RW
-DL-Files-Direcao-RW
-DL-Files-IT-Full
-```
+Os grupos Domain Local devem ficar organizados em `00_Admin > Groups > DomainLocal`.
 
-Grupos RW permitem:
+### Estrutura recomendada para File Services
 
-- Read
-- Write
-- Modify
-- Execute (se aplicável)
-
-### Permissões de Apenas Leitura (RO)
-
-```
-DL-Files-Financeiro-RO
-DL-Files-Comercial-RO
-DL-Files-Direcao-RO
+```text
+00_Admin
+└── Groups
+    └── DomainLocal
+        ├── DL-FS-Comercial-RW
+        ├── DL-FS-Comercial-RO
+        ├── DL-FS-Financeiro-RW
+        ├── DL-FS-Financeiro-RO
+        ├── DL-FS-Direcao-RW
+        └── DL-FS-Direcao-RO
 ```
 
-Grupos RO permitem:
+### Regras de design
 
-- Read
-- Execute (se aplicável)
+- DL representam recursos e permissões
+- DL não representam pessoas
+- DL não devem receber utilizadores diretamente
+- DL podem receber GG como membros
 
-### Permissões de Controlo Total (Full)
+---
 
-```
-DL-Files-IT-Full
-```
+## Pré-requisitos
 
-Grupo Full permite:
+- GG já criados
+- Estrutura de partilhas definida
+- Nomeação dos recursos aprovada
+- Servidor de ficheiros preparado
 
-- Full Control
-- Change Permissions
-- Take Ownership
+---
 
-## Estrutura de Grupos DL para Print Server
+## Implementação
 
-```
-DL-Print-Financeiro
-DL-Print-Comercial
-DL-Print-Direcao
-DL-Print-IT
-```
+### 4.1 Permissões de leitura e escrita
 
-Grupos de impressora permitem:
+- `DL-FS-Comercial-RW`
+- `DL-FS-Financeiro-RW`
+- `DL-FS-Direcao-RW`
 
-- Print
-- Manage Documents (se aplicável)
-- Manage Printer (apenas para administradores)
+### 4.2 Permissões de apenas leitura
 
-## Relação com Shares SMB e NTFS Permissions
+- `DL-FS-Comercial-RO`
+- `DL-FS-Financeiro-RO`
+- `DL-FS-Direcao-RO`
 
-Permissões são aplicadas em duas camadas:
+### 4.3 Relação com GG
 
-### Share Permissions (SMB)
-
-- Aplicadas a nível de share
-- Permissões típicas: Read, Change, Full Control
-- Menos granulares que NTFS
-- Cumulativas com NTFS (mais restritiva prevalece)
-
-### NTFS Permissions
-
-- Aplicadas a nível de ficheiro/pasta
-- Permissões granulares: Read, Write, Modify, Full Control, etc.
-- Herança de permissões de pastas parentes
-- Controlo fino de acesso
-
-DL groups são utilizados em ambas as camadas para consistência.
-
-## Integração com GG no Modelo AGDLP
-
-No modelo AGDLP, os grupos Domain Local (DL) são a camada de autorização:
-
-```
-A (Accounts) → G (Global Groups) → DL (Domain Local Groups) → P (Permissions)
+```text
+GG-Comercial → DL-FS-Comercial-RW
+GG-Comercial → DL-FS-Comercial-RO
+GG-Financeiro → DL-FS-Financeiro-RW
+GG-Financeiro → DL-FS-Financeiro-RO
+GG-Direcao → DL-FS-Direcao-RW
+GG-Direcao → DL-FS-Direcao-RO
 ```
 
-### Fluxo de Associação
+### 4.4 Exemplo de fluxo
 
-```
-joao.silva@lan.homelab.ao (Account)
-   ↓
-GG-IT (Global Group)
-   ↓
-DL-Files-IT-Full (Domain Local Group)
-   ↓
-NTFS Permission: Full Control
-```
-
-### Mapeamento GG → DL
-
-```
-GG-Financeiro → DL-Files-Financeiro-RW
-GG-Financeiro → DL-Files-Financeiro-RO
-GG-Financeiro → DL-Print-Financeiro
-
-GG-Comercial → DL-Files-Comercial-RW
-GG-Comercial → DL-Files-Comercial-RO
-GG-Comercial → DL-Print-Comercial
-
-GG-Direcao → DL-Files-Direcao-RW
-GG-Direcao → DL-Files-Direcao-RO
-GG-Direcao → DL-Print-Direcao
-
-GG-IT → DL-Files-IT-Full
-GG-IT → DL-Print-IT
+```text
+Ana Silva
+  ↓
+GG-Comercial
+  ↓
+DL-FS-Comercial-RW
+  ↓
+Permissão NTFS e SMB
+  ↓
+\\truenas\Comercial
 ```
 
-## Regras Críticas de Segurança
+---
 
-### Regra 1: DL Nunca Recebe Utilizadores Diretamente
+## Validação / Testes
 
-```
-User → DL (incorreto)
-User → GG → DL (correto)
-```
+Validar:
 
-Utilizadores devem sempre ser adicionados a grupos globais, que por sua vez são membros de grupos Domain Local.
+- O DL contém GG, não utilizadores diretos
+- O nome do DL reflete recurso e permissão
+- A permissão aplicada no recurso corresponde ao tipo `RW` ou `RO`
 
-### Regra 2: DL Representa Recurso, Não Identidade
+---
 
-Nomes de DL devem refletir o recurso e tipo de permissão:
+## Boas Práticas
 
-- Correto: DL-Files-Financeiro-RW
-- Incorreto: DL-FinanceiroUsers
+- Usar prefixo `DL-FS-` para file services
+- Separar leitura e escrita quando isso simplificar governação
+- Reutilizar DL apenas quando o recurso for realmente o mesmo
+- Documentar o propósito de cada DL
 
-### Regra 3: Minimizar Número de DL
+---
 
-Cada recurso deve ter o número mínimo de DL necessário:
+## Limitações Atuais
 
-- Um DL por tipo de permissão (RW, RO, Full)
-- Evitar DL redundantes
-- Reutilizar DL quando possível
+- Os DL ainda estão em fase de normalização documental
+- Alguns procedimentos antigos ainda referem nomes de grupos legados
 
-### Regra 4: Consistência entre Share e NTFS
+---
 
-Utilizar os mesmos DL groups em Share Permissions e NTFS Permissions para evitar conflitos e simplificar gestão.
+## Evolução Futura
 
-## Boas Práticas de Escalabilidade
-
-### Nomenclatura
-
-- Prefixo DL- para identificar grupos Domain Local
-- Nome do recurso (Files, Print)
-- Departamento ou função
-- Tipo de permissão (RW, RO, Full)
-- Consistência em todo o domínio
-
-### Gestão
-
-- Documentar cada DL group e sua finalidade
-- Revisar periodicamente utilização de DL groups
-- Remover DL groups não utilizados
-- Auditoria regular de membros de DL groups
-
-### Performance
-
-- Evitar DL groups com muitos membros aninhados
-- Limitar profundidade de aninhamento de grupos
-- Considerar impacto em logon time em grandes ambientes
-
-## Fluxo Completo de Acesso
-
-### Exemplo 1: Acesso a Ficheiros Financeiros
-
-```
-joao.silva@lan.homelab.ao (Account)
-   ↓
-Membro de GG-Financeiro (Global Group)
-   ↓
-GG-Financeiro é membro de DL-Files-Financeiro-RW (Domain Local Group)
-   ↓
-DL-Files-Financeiro-RW tem permissão RW em share Financeiro (SMB)
-   ↓
-DL-Files-Financeiro-RW tem permissão Modify em pasta Financeiro (NTFS)
-   ↓
-joao.silva@lan.homelab.ao acede ficheiros com permissão Modify
-```
-
-### Exemplo 2: Acesso a Impressora Comercial
-
-```
-pedro.ferreira@lan.homelab.ao (Account)
-   ↓
-Membro de GG-Comercial (Global Group)
-   ↓
-GG-Comercial é membro de DL-Print-Comercial (Domain Local Group)
-   ↓
-DL-Print-Comercial tem permissão Print em impressora Comercial
-   ↓
-pedro.ferreira@lan.homelab.ao imprime em impressora Comercial
-```
-
-## Considerações de Implementação
-
-DL groups serão implementados na Fase 3 após integração do TrueNAS no Active Directory. A criação de DL groups deve coincidir com:
-
-- Configuração de partilhas SMB departamentais
-- Definição de estrutura de permissões NTFS
-- Configuração de PaperCut NG para gestão de impressão
+- Expandir o modelo para outras classes de recursos, como impressão
+- Consolidar a nomenclatura em todos os documentos e procedimentos
+- Rever periodicamente membros e permissões associadas

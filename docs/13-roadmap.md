@@ -2,9 +2,9 @@
 
 ## 1. Visão Geral
 
-Este roadmap descreve a evolução planeada do ambiente **HomeLab Consultoria & Contabilidade**, uma infraestrutura de laboratório baseada em Active Directory e serviços de rede corporativos.
+Este roadmap descreve a evolução do ambiente **HomeLab Consultoria & Contabilidade** com base no estado atual já documentado e no que ainda falta implementar.
 
-O objetivo é evoluir de uma implementação básica para um ambiente com práticas próximas de produção.
+O objetivo é manter a documentação coerente com a arquitetura alvo: Active Directory para identidades, OUs para organização lógica, GG para funções, DL para autorização, File Services para recursos e GPOs para automação.
 
 ---
 
@@ -23,23 +23,42 @@ O objetivo é evoluir de uma implementação básica para um ambiente com práti
 
 ## 3. Fase 2 — Gestão e Segurança
 
-- [ ] Implementação de GPOs de hardening
-- [ ] Bloqueio de dispositivos USB
-- [ ] Políticas de segurança de endpoints
-- [ ] Configuração de wallpaper corporativo
-- [ ] Restrições de sistema (CMD, Painel de Controlo)
-- [ ] Auditoria de eventos de segurança
+### Concluído
+
+- [x] `GPO_Desktop_Restrictions`
+- [x] `GPO_Workstation_Baseline`
+- [x] `GPO_USB_Storage_Restriction`
+- [x] `GPO_Corporate_Wallpaper`
+- [x] `GPO_Windows_Defender_Policy`
+- [x] `GPO_Windows_Firewall_Policy`
+- [x] `GPO_Audit_Policy`
+
+### Previsto
+
+- [ ] `GPO_LAPS_Policy`
+- [ ] `GPO_BitLocker`
+- [ ] `GPO_Local_Administrators_Management`
+- [ ] `GPO_Remote_Desktop_Policy`
 
 ---
 
 ## 4. Fase 3 — Serviços Corporativos
 
-- [ ] Implementação do TrueNAS como servidor de ficheiros
-- [ ] Integração com Active Directory
-- [ ] Mapeamento de drives por GPO
-- [ ] Implementação de PaperCut NG (print services)
-- [ ] Partilhas departamentais estruturadas
-- [ ] Permissões baseadas em grupos (AGDLP)
+### Concluído
+
+- [x] `08 - File Services Design`
+- [x] `09 - File Services Implementation`
+- [x] `14 - TrueNAS SCALE Preparation and AD Integration`
+- [x] `10 - GPO_Drive_Mapping`
+- [x] Join do TrueNAS ao domínio `lan.homelab.ao`
+- [x] Criação das partilhas departamentais
+- [x] Criação dos DL para autorização de recursos
+- [x] Configuração final de SMB e ACLs no TrueNAS
+
+### Previsto
+
+- [ ] Implementação do PaperCut NG (Print Services)
+- [ ] Distribuição automática de impressoras via GPO
 
 ---
 
@@ -51,6 +70,8 @@ O objetivo é evoluir de uma implementação básica para um ambiente com práti
 - [ ] Delegação de controlo (modelo helpdesk)
 - [ ] Hardening avançado de servidores
 - [ ] Restrição de privilégios administrativos
+- [ ] AD CS e LDAPS
+- [ ] Autenticação do pfSense no AD
 
 ---
 

@@ -45,9 +45,9 @@ Funções:
 Responsável pelos serviços internos da organização.
 
 - Estações de trabalho Windows 10 Pro/Enterprise
-- Servidores de ficheiros (TrueNAS – em roadmap)
+- Servidor de ficheiros TrueNAS SCALE 25.10.4
 - Serviços de impressão (PaperCut NG – em roadmap)
-- Serviços futuros: backup, monitorização e PKI
+- Serviços futuros: backup, monitorização, PKI e automação
 
 ---
 
@@ -58,7 +58,7 @@ Responsável pelos serviços internos da organização.
 | pfSense | Gateway, firewall, DHCP |
 | LAB-DC01 | Domain Controller, DNS, AD DS |
 | PC-Geral01 | Endpoint do utilizador |
-| TrueNAS | Storage central (planeado) |
+| TrueNAS SCALE | Storage central e File Server |
 
 ---
 
@@ -111,6 +111,6 @@ A arquitetura segue os seguintes princípios:
 
 - Introdução de VLANs (users / servers / management)
 - Segundo Domain Controller (redundância)
-- Integração de storage central (TrueNAS)
 - Serviços de backup e monitorização
 - Hardening avançado de segurança e logging centralizado
+- Expansão dos serviços de ficheiros e impressão

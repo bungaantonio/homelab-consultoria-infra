@@ -19,7 +19,7 @@ A rede opera num único segmento:
 | pfSense | 10.0.10.1 | Gateway, firewall e DHCP |
 | LAB-DC01 | 10.0.10.10 | DNS, Active Directory Domain Controller |
 | LAB-WS-001 | DHCP | Estação de trabalho |
-| TrueNAS | 10.0.10.20 | Storage (planeado) |
+| TrueNAS | 10.0.10.20 | Storage central e File Server |
 
 ---
 
@@ -31,7 +31,7 @@ A rede utiliza um esquema simples de endereçamento estático e dinâmico:
 
 - `10.0.10.1` → Gateway (pfSense)
 - `10.0.10.10` → Domain Controller (fixo)
-- `10.0.10.20` → Storage (reservado)
+- `10.0.10.20` → TrueNAS (fixo)
 - Clientes → DHCP dinâmico
 
 ---

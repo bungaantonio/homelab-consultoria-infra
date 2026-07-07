@@ -25,13 +25,14 @@ Padronizar o processo de entrada de novos utilizadores no ambiente `lan.homelab.
 
 - Associar estação ao domínio
 - Login inicial com credenciais do utilizador
+- Aplicar GPO de drive mapping e confirmar acesso aos recursos departamentais
 
 ---
 
 ## 4. Configurações aplicadas
 
 - GPO de utilizador
-- Mapeamento de drives (futuro)
+- Mapeamento de drives via GPO
 - Configuração de desktop padrão
 
 ---

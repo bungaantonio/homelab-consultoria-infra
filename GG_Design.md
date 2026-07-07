@@ -1,113 +1,109 @@
 # GG Design - Global Groups
 
-## Definição de Global Groups
+## Visão Geral
 
-Global Groups são grupos de segurança com scope de domínio que podem conter utilizadores e outros grupos globais do mesmo domínio. São utilizados para organizar utilizadores por função ou departamento dentro de um único domínio.
+Global Groups são grupos de segurança com scope de domínio usados para representar identidade funcional dentro do domínio `lan.homelab.ao`.
 
-No modelo AGDLP (Accounts → Global Groups → Domain Local Groups → Permissions), os grupos globais representam a camada de identidade funcional.
+No modelo AGDLP, os GG respondem à pergunta: quem é o utilizador?
 
-## Estrutura dos Grupos por Departamento
+---
 
-```
-GG-IT
-GG-Financeiro
-GG-Comercial
-GG-Direcao
-```
+## Objetivo
 
-### GG-IT
+Os GG servem para:
 
-Contém utilizadores do departamento de TI. Responsáveis pela administração de sistemas, infraestrutura e suporte técnico.
+- Agrupar utilizadores por função ou departamento
+- Manter identidade separada de autorização
+- Ser a base para associação com Domain Local Groups
+- Permitir gestão simples e escalável de membros
 
-### GG-Financeiro
+---
 
-Contém utilizadores do departamento financeiro. Responsáveis pela gestão contabil, fiscal e financeira da empresa.
+## Arquitetura
 
-### GG-Comercial
+Os grupos globais devem ficar organizados em `00_Admin > Groups > Global`.
 
-Contém utilizadores do departamento comercial. Responsáveis pela relação com clientes, vendas e negociação.
-
-### GG-Direcao
-
-Contém utilizadores da direção. Responsáveis pela gestão estratégica, decisão e supervisão da empresa.
-
-## Mapeamento Utilizador → Grupo
-
-Cada utilizador deve ser membro do grupo global correspondente ao seu departamento:
-
-```
-Utilizador TI → GG-IT
-Utilizador Financeiro → GG-Financeiro
-Utilizador Comercial → GG-Comercial
-Utilizador Direcao → GG-Direcao
+```text
+00_Admin
+└── Groups
+	└── Global
+		├── GG-Comercial
+		├── GG-Financeiro
+		├── GG-Direcao
+		├── GG-IT
+		└── GG-Domain-Admins
 ```
 
-Um utilizador pode pertencer a múltiplos grupos globais se tiver funções cruzadas, mas a prática recomendada é manter associação única para simplificar gestão.
+### Regras de design
 
-## Regras de Design de GG
+- GG representam pessoas, funções e departamentos
+- GG não representam recursos
+- GG não recebem permissões de share ou NTFS diretamente
+- GG não devem misturar identidade com autorização
 
-### Nomenclatura
+---
 
-- Prefixo GG- para identificar grupos globais
-- Nome do departamento ou função após prefixo
-- Consistência em todo o domínio
-- Evitar caracteres especiais ou espaços
+## Pré-requisitos
 
-### Granularidade
+- Estrutura de OUs definida
+- Convenção de nomes aprovada
+- Separação entre grupos globais e Domain Local
 
-- Grupos devem representar funções de negócio, não recursos
-- Evitar grupos por aplicação ou sistema específico
-- Manter número de grupos gerenciável
-- Agrupar por departamento ou função lógica
+---
 
-### Função
+## Implementação
 
-- GG representam quem é o utilizador na organização
-- GG são base para grupos de permissão (DL)
-- GG não devem ter permissões diretas em recursos
-- GG são utilizados apenas para agrupamento funcional
+### Exemplos de grupos
 
-## Papel dos GG no Modelo AGDLP
+- `GG-IT`
+- `GG-Financeiro`
+- `GG-Comercial`
+- `GG-Direcao`
+- `GG-Domain-Admins`
 
-No modelo AGDLP, os grupos globais (G) são a camada intermédia entre contas de utilizador (A) e grupos de permissão (DL):
+### Mapeamento de utilizador para grupo
 
-```
-A (Accounts) → G (Global Groups) → DL (Domain Local Groups) → P (Permissions)
-```
-
-Os GG permitem:
-
-- Desacoplamento entre identidade e recurso
-- Facilidade em alterar permissões sem modificar grupos de utilizadores
-- Gestão centralizada de identidade funcional
-- Escalabilidade em ambientes multi-domínio
-
-## Limitações dos GG
-
-Grupos globais não devem ser utilizados para:
-
-- Permissões diretas em recursos (ficheiros, impressoras, shares)
-- Controlo de acesso a recursos específicos
-- Autorização em recursos de outros domínios (em florestas multi-domínio)
-
-Permissões devem ser aplicadas através de grupos Domain Local (DL), que recebem os grupos globais como membros.
-
-## Exemplos de Associação de Utilizadores a GG
-
-### Associação Básica
-
-```
+```text
 joao.silva@lan.homelab.ao → GG-IT
 maria.santos@lan.homelab.ao → GG-Financeiro
 pedro.ferreira@lan.homelab.ao → GG-Comercial
 ana.carvalho@lan.homelab.ao → GG-Direcao
 ```
 
-### Associação Múltipla (caso especial)
+### Casos especiais
 
-```
-joao.silva@lan.homelab.ao → GG-IT
-joao.silva@lan.homelab.ao → GG-Financeiro (se tiver função cruzada)
-```
+Utilizadores com funções cruzadas podem pertencer a mais do que um GG, mas isso deve ser exceção.
 
-Nota: Associação múltipla deve ser exceção, não regra, para manter simplicidade.
+---
+
+## Validação / Testes
+
+Validar:
+
+- Membros corretos em cada GG
+- Nome consistente com a função do grupo
+- Ausência de grupos de recurso dentro da camada GG
+
+---
+
+## Boas Práticas
+
+- Usar prefixo `GG-` para todos os grupos globais
+- Manter nomes curtos e sem caracteres especiais
+- Documentar a finalidade de cada grupo
+- Evitar grupos excessivamente granulares
+
+---
+
+## Limitações Atuais
+
+- Ainda existem documentos legados com nomes antigos de grupos
+- A normalização completa depende da revisão dos procedimentos operacionais
+
+---
+
+## Evolução Futura
+
+- Expandir o modelo para grupos de função mais granulares quando necessário
+- Criar grupos administrativos separados para operações privilegiadas
+- Rever periodicamente membros e permissões associadas

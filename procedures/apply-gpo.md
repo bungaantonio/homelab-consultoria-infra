@@ -13,6 +13,8 @@ Implementar Group Policy Objects (GPOs) no domínio `lan.homelab.ao` através do
 - Computadores nas OUs corretas
 - Pipeline AD/GPO funcional (testado com GPO de validação)
 - Grupos globais (GG) criados e configurados
+- Grupos Domain Local (DL) criados quando houver recursos associados
+- File Server e partilhas validadas para GPOs de drive mapping
 
 ---
 
@@ -32,6 +34,8 @@ Implementar Group Policy Objects (GPOs) no domínio `lan.homelab.ao` através do
 
 5. GPO_Drive_Mapping
 6. GPO_Printer_Deployment
+
+> Nota: estas GPOs automatizam a entrega de recursos. As permissões continuam a ser controladas por GG → DL → Permissions.
 
 ### FASE 4 - Hardening Avançado
 
@@ -169,9 +173,37 @@ Testes funcionais:
 - Evitar usar domínio inteiro como scope inicial
 - Utilizar OU Test para validação quando aplicável
 - Usar grupos de segurança (GG) para filtering
+- Para Drive Mapping, validar primeiro as permissões do File Server e só depois aplicar a GPO
+- Não usar GPO para compensar ausência de DL ou ACL corretas
 
 ---
 
-## 9. Resultado Esperado
+## 9. GPO_Drive_Mapping
+
+### Pré-condições específicas
+
+- File Server funcional
+- Partilhas criadas
+- Permissões configuradas
+- GG e DL existentes
+- Testes SMB concluídos
+
+### Implementação
+
+1. Criar a GPO `GPO_Drive_Mapping`
+2. Linkar a GPO à OU de utilizadores apropriada
+3. Usar `User Configuration → Preferences → Windows Settings → Drive Maps`
+4. Aplicar `Security Filtering: Authenticated Users`
+5. Definir `Item-Level Targeting` por `GG-*`
+
+### Exemplo
+
+- `F:` → `\\truenas\Financeiro` → `GG-Financeiro`
+- `S:` → `\\truenas\Comercial` → `GG-Comercial`
+- `X:` → `\\truenas\Direcao` → `GG-Direcao`
+
+---
+
+## 10. Resultado Esperado
 
 GPO aplicada corretamente, visível em gpresult (sob a secção de políticas aplicadas) e funcionalmente validada no cliente com o bloqueio de acessos ativo.

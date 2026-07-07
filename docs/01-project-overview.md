@@ -29,7 +29,7 @@ O ambiente simula uma infraestrutura corporativa com:
 - 1 controlador de domínio (DC)
 - Estações de trabalho Windows
 - Serviços de rede internos
-- Serviços de ficheiros e impressão (em implementação)
+- Serviços de ficheiros operacionais e impressão em fase seguinte
 
 O sistema opera numa rede isolada `10.0.10.0/24`.
 
@@ -74,7 +74,7 @@ O ambiente evolui em fases:
 
 - Fundação da infraestrutura (rede + domínio)
 - Implementação de GPOs e segurança
-- Integração de serviços corporativos (file/print)
+- Integração de serviços corporativos (file concluído, print em fase seguinte)
 - Hardening e features avançadas (AD Recycle Bin, LAPS, FGPP, AD CS)
 
 ---

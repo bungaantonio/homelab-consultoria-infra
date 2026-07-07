@@ -41,6 +41,7 @@ Integrar o servidor TrueNAS ao domínio `lan.homelab.ao` para autenticação cen
 - Estado: “Joined”
 - Utilizadores do domínio visíveis
 - Teste de autenticação SMB
+- Validação Winbind concluída (`wbinfo -t` e `wbinfo --ping-dc`)
 
 ---
 
@@ -64,3 +65,7 @@ Integrar o servidor TrueNAS ao domínio `lan.homelab.ao` para autenticação cen
 ## 7. Resultado Esperado
 
 TrueNAS integrado ao domínio com autenticação centralizada e controlo de acesso baseado em grupos.
+
+## 8. Estado Atual
+
+Procedimento concluído no ambiente documentado.
