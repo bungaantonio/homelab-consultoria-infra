@@ -130,9 +130,9 @@ A aplicação segue a hierarquia padrão:
 | 3 | GPO_USB_Storage_Restriction | Workstations | Bloqueio de dispositivos de armazenamento USB | Concluído | Fase 1 |
 | 4 | GPO_Corporate_Wallpaper | Utilizadores | Aplicação de wallpaper institucional | Concluído | Fase 1 |
 | 5 | GPO_Desktop_Restrictions | Utilizadores | Bloqueio de Painel de Controlo, CMD, PowerShell, alteração de wallpaper | Concluído | Fase 1 |
-| 6 | GPO_Windows_Defender_Policy | Workstations | Proteção em tempo real, Cloud Protection, atualizações automáticas, scan periódico | Pendente | Fase 2 |
-| 7 | GPO_Windows_Firewall_Policy | Workstations e Servers | Firewall ativa, perfis Domain/Public/Private, bloqueio inbound por defeito | Pendente | Fase 2 |
-| 8 | GPO_Audit_Policy | Domain Controllers | Auditoria de logon, logoff, alteração de utilizadores/grupos, criação/eliminação de objetos | Pendente | Fase 2 |
+| 6 | GPO_Windows_Defender_Policy | Workstations | Proteção em tempo real, Cloud Protection, atualizações automáticas, scan periódico | Concluído | Fase 2 |
+| 7 | GPO_Windows_Firewall_Policy | Workstations e Servers | Firewall ativa, perfis Domain/Public/Private, bloqueio inbound por defeito | Concluído | Fase 2 |
+| 8 | GPO_Audit_Policy | Domain Controllers | Auditoria de logon, logoff, alteração de utilizadores/grupos, criação/eliminação de objetos | Concluído | Fase 2 |
 | 9 | GPO_Drive_Mapping | Utilizadores | Mapeamento automático de drives por departamento (Financeiro F:, Comercial C:, Direção D:) | Pendente | Fase 3 |
 | 10 | GPO_Printer_Deployment | Utilizadores | Distribuição automática de impressoras (via PaperCut) | Pendente | Fase 3 |
 | 11 | GPO_Local_Administrators_Management | Workstations | Controlo do grupo local Administrators para evitar administradores não autorizados | Pendente | Fase 4 |
