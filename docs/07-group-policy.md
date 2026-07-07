@@ -139,9 +139,3 @@ A aplicação segue a hierarquia padrão:
 | 12 | GPO_Remote_Desktop_Policy | Servers | Configuração de acesso RDP, NLA obrigatório, firewall | Pendente | Fase 4 |
 | 13 | GPO_BitLocker | Workstations (opcional) | Criptografia de disco, recuperação de chaves, integração com AD (requer TPM) | Pendente | Fase 4 |
 | 14 | GPO_LAPS_Policy | Workstations | Password única por máquina, rotação automática, armazenamento no AD | Pendente | Fase 4 |
-
-### Legenda de Status
-- Pendente
-- Em Progresso
-- Concluído
-- Bloqueado/Requer Dependências
