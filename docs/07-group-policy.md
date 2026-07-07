@@ -125,11 +125,11 @@ A aplicação segue a hierarquia padrão:
 
 | ID | GPO | Escopo | Objetivo | Status | Fase |
 |----|-----|--------|----------|--------|------|
-| 1 | GPO_Baseline_Domain_Policy | Domínio | Políticas globais de segurança (palavras-passe, bloqueio de conta, auditoria) | Pendente | Fase 1 |
-| 2 | GPO_Workstation_Baseline | `02_Computers > Workstations` | Padronização de estações (Firewall, Defender, Windows Update, AutoRun, sincronização de hora) | Pendente | Fase 1 |
-| 3 | GPO_USB_Storage_Restriction | Workstations | Bloqueio de dispositivos de armazenamento USB | Pendente | Fase 1 |
-| 4 | GPO_Corporate_Wallpaper | Utilizadores | Aplicação de wallpaper institucional | Pendente | Fase 1 |
-| 5 | GPO_Desktop_Restrictions | Utilizadores | Bloqueio de Painel de Controlo, CMD, PowerShell, alteração de wallpaper | Pendente | Fase 1 |
+| 1 | GPO_Baseline_Domain_Policy | Domínio | Políticas globais de segurança (palavras-passe, bloqueio de conta, auditoria) | Concluído | Fase 1 |
+| 2 | GPO_Workstation_Baseline | `02_Computers > Workstations` | Padronização de estações (Firewall, Defender, Windows Update, AutoRun, sincronização de hora) | Concluído | Fase 1 |
+| 3 | GPO_USB_Storage_Restriction | Workstations | Bloqueio de dispositivos de armazenamento USB | Concluído | Fase 1 |
+| 4 | GPO_Corporate_Wallpaper | Utilizadores | Aplicação de wallpaper institucional | Concluído | Fase 1 |
+| 5 | GPO_Desktop_Restrictions | Utilizadores | Bloqueio de Painel de Controlo, CMD, PowerShell, alteração de wallpaper | Concluído | Fase 1 |
 | 6 | GPO_Windows_Defender_Policy | Workstations | Proteção em tempo real, Cloud Protection, atualizações automáticas, scan periódico | Pendente | Fase 2 |
 | 7 | GPO_Windows_Firewall_Policy | Workstations e Servers | Firewall ativa, perfis Domain/Public/Private, bloqueio inbound por defeito | Pendente | Fase 2 |
 | 8 | GPO_Audit_Policy | Domain Controllers | Auditoria de logon, logoff, alteração de utilizadores/grupos, criação/eliminação de objetos | Pendente | Fase 2 |
