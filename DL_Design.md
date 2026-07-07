@@ -118,7 +118,7 @@ Validar:
 ## Limitações Atuais
 
 - Os DL ainda estão em fase de normalização documental
-- Alguns procedimentos antigos ainda referem nomes de grupos legados
+- A nomenclatura ativa já está normalizada nos documentos operacionais
 
 ---
 

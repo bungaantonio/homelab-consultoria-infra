@@ -97,8 +97,8 @@ Validar:
 
 ## Limitações Atuais
 
-- Ainda existem documentos legados com nomes antigos de grupos
-- A normalização completa depende da revisão dos procedimentos operacionais
+- A nomenclatura ativa está normalizada nos documentos operacionais
+- A revisão periódica mantém a coerência com a estrutura atual
 
 ---
 
