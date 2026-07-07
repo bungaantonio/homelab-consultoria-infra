@@ -19,7 +19,7 @@ O objetivo do laboratório é aplicar as melhores práticas de administração d
 
 O ambiente opera de forma fechada e segura na sub-rede `10.0.10.0/24`.
 
-![Diagrama da arquitetura HomeLab](HomeLab_Diagram.png)
+![Diagrama da arquitetura HomeLab](/HomeLab_Diagram.png)
 
 | Equipamento    | Endereço IP   | Função / Serviço                              |
 | -------------- | ------------- | --------------------------------------------- |
