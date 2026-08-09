@@ -34,6 +34,16 @@ A rede utiliza um esquema simples de endereçamento estático e dinâmico:
 - `10.0.10.20` → TrueNAS (fixo)
 - Clientes → DHCP dinâmico
 
+### 3.2 Plano IPAM
+
+Para uma referência mais completa das atribuições e das gamas de rede, consulte o [Plano IPAM](03-network/ipam.md).
+
+O plano inclui:
+
+- endereços fixos para infraestrutura crítica;
+- a gama de DHCP para utilizadores e dispositivos clientes;
+- espaço reservado para expansão futura.
+
 ---
 
 ## 4. DHCP (pfSense)

@@ -1,137 +1,103 @@
 # Infraestrutura Corporativa: HomeLab Consultoria & Contabilidade
 
-## Objetivo
+Este repositório documenta um laboratório de estudo para simular uma infraestrutura de TI corporativa pequena, com foco em identidade, segurança, partilha de ficheiros, gestão administrativa e suporte a uma organização que presta serviços de consultoria e contabilidade.
 
-Este projeto documenta a conceção, implementação e administração da infraestrutura de TI da **HomeLab Consultoria & Contabilidade**, uma empresa fictícia de prestação de serviços fiscais e auditoria financeira para PMEs.
+## O que é este projeto?
 
-O objetivo do laboratório é aplicar as melhores práticas de administração de sistemas em ambiente corporativo, garantindo segurança, centralização de identidades e auditoria num ambiente com 5 utilizadores que lidam com dados altamente sensíveis.
+É um projeto de documentação e aprendizagem que descreve a construção de um ambiente corporativo fictício para a empresa **HomeLab Consultoria & Contabilidade**, com necessidades reais de:
 
-## Tecnologias Utilizadas
+- rede isolada e controlada;
+- domínio Active Directory;
+- políticas de segurança e GPO;
+- partilhas de ficheiros com controlo de acesso;
+- uma lógica de autorização baseada em grupos;
+- suporte a funções de consultoria, contabilidade, fiscalidade e gestão.
 
-* **Firewall / Gateway:** pfSense
-* **Identidade & DNS:** Windows Server 2025 (Active Directory Domain Services)
-* **Estações de Trabalho:** Windows 10 Pro / Enterprise
-* **Serviços de Ficheiros:** TrueNAS SCALE 25.10.4 *(Principal e operacional)*
-* **Armazenamento Alternativo:** Windows Server File Server *(Alternativa futura)*
-* **Gestão de Impressão:** PaperCut NG *(Próxima fase)*
+O objetivo principal é demonstrar como uma infraestrutura empresarial pode ser organizada e administrada, mesmo num ambiente de laboratório.
 
-## Arquitetura e Topologia
+## Como foi pensado e construído
 
-O ambiente opera de forma fechada e segura na sub-rede `10.0.10.0/24`.
+A estrutura do projeto foi pensada em camadas:
 
-![Diagrama da arquitetura HomeLab](/HomeLab_Diagram.png)
+1. Fundação da rede
+2. Criação do domínio e da identidade
+3. Definição de grupos e permissões
+4. Implementação de recursos como ficheiros e partilhas
+5. Aplicação de políticas e hardening
+6. Evolução para funcionalidades mais avançadas
 
-| Equipamento    | Endereço IP   | Função / Serviço                              |
-| -------------- | ------------- | --------------------------------------------- |
-| **pfSense**    | `10.0.10.1`   | Gateway, NAT, Firewall e Servidor DHCP        |
-| **LAB-DC01**   | `10.0.10.10`  | Domain Controller, AD DS, DNS Autoritativo    |
-| **LAB-WS-001** | DHCP Dinâmico | Estação de trabalho do utilizador (Win 10)    |
-| **TrueNAS**    | `10.0.10.20`  | Servidor de Ficheiros principal (SMB/ACLs)    |
+A filosofia central é separar claramente:
 
-## Estrutura do Domínio (`lan.homelab.ao`)
+- quem é o utilizador;
+- onde esse utilizador pertence;
+- quais permissões esse utilizador tem sobre um recurso.
 
-A infraestrutura lógica foi desenhada para facilitar a aplicação de Políticas de Grupo (GPOs) baseadas em departamentos e o princípio do menor privilégio.
+## Como funciona o laboratório
+
+O ambiente opera na sub-rede `10.0.10.0/24` e utiliza os seguintes componentes principais:
+
+- **pfSense** como gateway, firewall e DHCP
+- **Windows Server / Active Directory** como serviço de identidade e DNS
+- **TrueNAS SCALE** como servidor de ficheiros com integração AD
+- **GPOs** para aplicar políticas de configuração e segurança
+
+A lógica de autorização segue o modelo simplificado:
+
+```text
+Utilizador → Grupo Global (GG) → Grupo Domain Local (DL) → Recurso
+```
+
+## Contexto de negócio e organização
+
+O laboratório foi desenhado para refletir uma organização composta por áreas funcionais distintas:
+
+- **Consultoria**: apoio a clientes, documentos de projeto e operação diária.
+- **Contabilidade e Fiscalidade**: dados financeiros sensíveis, relatórios e processos internos.
+- **Direção**: necessidade de visão centralizada e controlo operacional.
+- **TI**: administração de identidade, segurança e serviços de infraestrutura.
+
+Esta separação é refletida na estrutura lógica do domínio e nos grupos de acesso.
+
+## Estrutura do domínio
+
+O domínio principal é `lan.homelab.ao` e a organização lógica foi pensada para suportar departamentos e políticas por função.
 
 ```text
 lan.homelab.ao
-│
 ├── 00_Admin
-│   ├── Users
-│   └── Groups
-│       ├── Global
-│       │   ├── GG-Comercial
-│       │   ├── GG-Financeiro
-│       │   ├── GG-Direcao
-│       │   ├── GG-IT
-│       │   └── GG-Domain-Admins
-│       └── DomainLocal
-│           ├── DL-FS-Comercial-RW
-│           ├── DL-FS-Comercial-RO
-│           ├── DL-FS-Financeiro-RW
-│           └── DL-FS-Financeiro-RO
-│
 ├── 01_Users
-│   ├── Financeiro
-│   ├── Comercial
-│   └── Direcao
-│
 ├── 02_Computers
-│   ├── Workstations
-│   └── Test
-│
 ├── 03_Servers
-│   ├── Domain Controllers
-│   ├── Infrastructure
-│   ├── Applications
-│   ├── File Servers
-│   └── Print Servers
-│
 └── 04_Service_Accounts
-    ├── Applications
-    ├── Infrastructure
-    └── Automation
-
 ```
 
-## Documentação Técnica
+## Gestão de rede e endereçamento
 
-- [04 - Active Directory](docs/04-active-directory.md)
-- [07 - Group Policy](docs/07-group-policy.md)
-- [08 - File Services Design](docs/08-file-services-design.md)
-- [09 - File Services Implementation](docs/09-file-services-implementation.md)
-- [14 - TrueNAS SCALE Preparation and AD Integration](docs/14-truenas-scale-preparacao-integracao-ad.md)
-- [10 - GPO_Drive_Mapping](docs/10-gpo-drive-mapping.md)
-- [09 - Print Services](docs/09-print-services.md)
-- [10 - Backup](docs/10-backup.md)
-## Serviços Implementados (v0.1)
-* **Routing e Gateway:** Acesso à internet gerido por um único ponto de falha controlado (pfSense).
-* **Serviços de Domínio:** Floresta e Domínio `lan.homelab.ao` criados.
-* **Handoff de DNS:** O DHCP do pfSense entrega o IP estático do DC (`10.0.10.10`) como único DNS para os clientes.
-* **DNS Forwarding:** O Domain Controller resolve domínios internos e encaminha tráfego externo para o pfSense.
-* **Integração Endpoint:** Estação Windows 10 associada ao domínio e a autenticar utilizadores da rede.
-* **Storage Principal:** TrueNAS SCALE 25.10.4 integrado ao AD, com ZFS, SMB, ACLs NFSv4 e drive mapping operacional.
+Para detalhes sobre atribuições e gamas de rede, consulte o [Plano IPAM](docs/03-network/ipam.md).
 
-## Roadmap de Implementação
+## Como navegar este repositório
 
-**Fase 1: Fundação (Concluída - v0.1)**
-* [x] Configuração base de Rede (pfSense)
-* [x] Instalação do Windows Server e promoção a Domain Controller
-* [x] Configuração da estrutura lógica do AD (OUs, Grupos, 5 Utilizadores)
-* [x] Associação do Windows 10 ao Domínio
+- [docs/00-project-guide.md](docs/00-project-guide.md) — guia principal de leitura do projeto
+- [docs/01-project-overview.md](docs/01-project-overview.md) — contexto e objetivo
+- [docs/02-architecture.md](docs/02-architecture.md) — visão geral da arquitetura
+- [docs/03-network.md](docs/03-network.md) — rede e topologia
+- [docs/03-network/ipam.md](docs/03-network/ipam.md) — plano de endereçamento e atribuições
+- [docs/04-active-directory.md](docs/04-active-directory.md) — Active Directory e organização lógica
+- [docs/08-file-services-design.md](docs/08-file-services-design.md) — desenho dos serviços de ficheiros
+- [docs/14-truenas-scale-preparacao-integracao-ad.md](docs/14-truenas-scale-preparacao-integracao-ad.md) — implementação do TrueNAS
+- [docs/13-roadmap.md](docs/13-roadmap.md) — roadmap de evolução do laboratório
 
-**Fase 2: Gestão e Segurança (GPOs e Hardening)**
-* [x] GPO_Desktop_Restrictions (CMD, PowerShell e Painel de Controlo)
-* [x] GPO_Workstation_Baseline (Firewall, Defender, Windows Update, AutoRun)
-* [x] GPO_USB_Storage_Restriction
-* [x] GPO_Corporate_Wallpaper
-* [x] GPO_Audit_Policy
-* [ ] GPO_LAPS_Policy
-* [ ] GPO_BitLocker
-* [ ] GPO_Local_Administrators_Management
-* [ ] GPO_Remote_Desktop_Policy
+## Estado atual
 
-**Fase 3: Serviços Corporativos**
-* [x] File Services Design alinhado com AGDLP
-* [x] TrueNAS SCALE 25.10.4 preparado e validado para integração ao AD
-* [x] Join do TrueNAS ao domínio `lan.homelab.ao`
-* [x] Criação de partilhas departamentais
-* [x] Criação dos DL para autorização de recursos
-* [x] Configuração final de SMB e ACLs no TrueNAS
-* [x] Mapeamento automático de drives via GPO
-* [ ] Implementação e integração do PaperCut NG (Gestão de Impressão)
+O projeto já mostra uma base sólida de:
 
-**Fase 4: Segurança Avançada e Enterprise**
-* [ ] Ativação da Lixeira do Active Directory (AD Recycle Bin)
-* [ ] Delegação de Controle (Helpdesk com acesso restrito a Reset de Passwords)
-* [ ] Diretivas de Senha Refinadas (Fine-Grained Password Policies - FGPP)
-* [ ] Autenticação do pfSense no AD (Acesso VPN / Admin via conta de rede)
-* [ ] Configurar o AD CS (Serviços de Certificados do Active Directory) e LDAPS
+- rede e domínios;
+- identidade e estrutura lógica no AD;
+- integração de ficheiros com controlo de acesso;
+- políticas e GPOs base.
 
-**Fase 5: Automação e Observabilidade**
-* [ ] Automatização de tarefas administrativas
-* [ ] Scripts de provisionamento de utilizadores
-* [ ] Monitorização em tempo real
-* [ ] Alertas automáticos de falhas
+O que ainda está por evoluir inclui segurança avançada, automação, impressão e monitorização.
 
 ## Licença
+
 Documentação desenvolvida para fins de estudo, laboratório e portfólio de arquitetura de TI.
