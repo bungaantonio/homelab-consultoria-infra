@@ -2,7 +2,7 @@
 
 ## 1. Objetivo
 
-Este documento descreve os serviços auxiliares que suportam a operação contínua do laboratório, incluindo backup, monitorização e logging.
+Este documento descreve os serviços auxiliares que suportam a operação contínua da **HomeLab Consultoria & Contabilidade**, incluindo backup, monitorização e logging. Estes serviços são importantes para proteger dados de negócio, manter a disponibilidade de partilhas e garantir uma visão operacional mais próxima de uma empresa real.
 
 ## 2. Serviços previstos
 

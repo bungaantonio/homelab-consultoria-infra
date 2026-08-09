@@ -5,7 +5,9 @@ Estado: Implementado (Segmentação VLAN 10/20/30); Definido/Planeado (LAPS, Bit
 Versão: v0.2.0
 ```
 
-Este documento descreve as políticas e controlos de segurança aplicados na infraestrutura corporativa **HomeLab Consultoria & Contabilidade** para mitigar riscos de segurança e garantir o controlo de acesso.
+Este documento descreve as políticas e controlos de segurança aplicados na infraestrutura corporativa **HomeLab Consultoria & Contabilidade** para proteger documentos financeiros, relatórios internos, dados de clientes e o funcionamento diário da organização fictícia. O foco é reduzir riscos sem tornar a operação demasiado complexa, mantendo um modelo de segurança orientado para o princípio do menor privilégio.
+
+As regras de rede, identidade e endpoints foram pensadas para sustentar uma operação corporativa pequena, com separação entre utilizadores, administração e serviços críticos.
 
 ---
 

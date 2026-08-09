@@ -5,7 +5,9 @@ Estado: Planeado (Desenho Arquitetural)
 Versão: v0.2.0
 ```
 
-Este documento especifica o planeamento arquitetural para a centralização de armazenamento de ficheiros da **HomeLab Consultoria & Contabilidade**, utilizando o sistema operativo **TrueNAS SCALE**.
+Este documento especifica o planeamento arquitetural para a centralização de armazenamento de ficheiros da **HomeLab Consultoria & Contabilidade**, utilizando o sistema operativo **TrueNAS SCALE**. O objetivo é disponibilizar um repositório seguro para documentos de consultoria, relatórios contabilísticos, ficheiros de operação e dados que exigem controlo de acesso por departamento.
+
+O desenho procura refletir a forma como uma empresa pequena organiza o acesso a informação sensível, mantendo partilhas separadas por área funcional e por nível de confiança.
 
 ---
 

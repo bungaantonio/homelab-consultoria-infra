@@ -2,7 +2,7 @@
 
 ## 1. Objetivo
 
-Este documento consolida a visão dos serviços fundamentais de rede e identidade que suportam a infraestrutura **HomeLab Consultoria & Contabilidade**.
+Este documento consolida a visão dos serviços fundamentais de rede e identidade que suportam a infraestrutura **HomeLab Consultoria & Contabilidade**. Estes serviços são a base operacional da organização fictícia, permitindo que consultores, contabilistas e administradores trabalhem com autenticação, resolução de nomes e conectividade estáveis.
 
 ## 2. Serviços base
 

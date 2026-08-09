@@ -5,7 +5,9 @@ Estado: Implementado (Serviços Base e OUs); Definido arquiteturalmente (Contas 
 Versão: v0.2.0
 ```
 
-Este documento detalha o desenho lógico e a implementação do serviço de identidades **Active Directory Domain Services (AD DS)** no domínio `corp.homelab.ao`.
+Este documento detalha o desenho lógico e a implementação do serviço de identidades **Active Directory Domain Services (AD DS)** no domínio `corp.homelab.ao`, com foco em apoiar a operação corporativa da **HomeLab Consultoria & Contabilidade**. A estrutura foi pensada para separar claramente administração, utilizadores comuns, departamentos, servidores e contas de serviço, refletindo a forma como uma organização de consultoria e contabilidade organiza o acesso à informação.
+
+A intenção é garantir que os utilizadores tenham acesso apenas ao que necessitam para trabalhar, preservando a confidencialidade de documentos fiscais, relatórios internos e dados de clientes.
 
 ---
 

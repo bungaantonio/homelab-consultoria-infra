@@ -9,6 +9,7 @@ Todas as alterações estruturais e de planeamento da infraestrutura corporativa
 - Alinhada a narrativa do projeto ao contexto de negócio da **HomeLab Consultoria & Contabilidade** e ao domínio atual **`corp.homelab.ao`**.
 - Reforçado o plano IPAM com a política de atribuição e a estrutura de rede por VLANs.
 - Mantida a navegação principal consistente entre o README e os documentos centrais.
+- Reforçada a linguagem técnica dos documentos de arquitetura, identidade, segurança, storage e serviços para refletir uma infraestrutura corporativa orientada a consultoria e contabilidade.
 
 ## [v0.2.1] - 2026-08-09
 

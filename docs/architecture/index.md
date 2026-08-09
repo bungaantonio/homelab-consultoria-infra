@@ -5,7 +5,9 @@ Estado: Definido arquiteturalmente (AD e Firewall implementados; Storage/Serviç
 Versão: v0.2.0
 ```
 
-Este documento estabelece o desenho de arquitetura corporativa da **HomeLab Consultoria & Contabilidade** para a versão **v0.2.0**. A infraestrutura foi projetada para garantir segurança no tratamento de dados financeiros e contabilidade para uma equipa inicial de 5 utilizadores.
+Este documento estabelece o desenho de arquitetura corporativa da **HomeLab Consultoria & Contabilidade** para a versão **v0.2.0**. A infraestrutura foi pensada para suportar um ambiente de trabalho com necessidades reais de consultoria, contabilidade, fiscalidade, gestão documental e controlo de acesso a informação sensível.
+
+A arquitetura tem como objetivo garantir que a empresa fictícia consiga operar com uma base tecnológica segura, organizada e suficiente para apoiar utilizadores, departamentos e serviços críticos sem depender de um ambiente de produção real.
 
 ---
 

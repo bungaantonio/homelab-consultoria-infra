@@ -5,7 +5,9 @@ Estado: Implementado (pfSense, VLANs 10/20/30 e WAN); Planeado (VLANs 40/50 e VP
 Versão: v0.2.0
 ```
 
-Este documento descreve as definições de rede, interfaces lógicas e regras de filtragem implementadas no gateway de segurança **pfSense** (`HL-LDA-P-FW01`) virtualizado no VMware Workstation Pro.
+Este documento descreve as definições de rede, interfaces lógicas e regras de filtragem implementadas no gateway de segurança **pfSense** (`HL-LDA-P-FW01`) virtualizado no VMware Workstation Pro. O objetivo é garantir que a rede da **HomeLab Consultoria & Contabilidade** separe corretamente utilizadores, serviços internos e áreas sensíveis, sem comprometer a operação diária da organização fictícia.
+
+As regras de filtragem foram definidas para proteger dados de consultoria e contabilidade, reforçando a separação entre utilizadores comuns, administração de TI e recursos críticos.
 
 ---
 
