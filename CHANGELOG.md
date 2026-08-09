@@ -2,6 +2,14 @@
 
 Todas as alterações estruturais e de planeamento da infraestrutura corporativa **HomeLab Consultoria & Contabilidade** serão documentadas neste ficheiro.
 
+## [v0.2.2] - 2026-08-09
+
+### Alterado
+- Consolidada a documentação principal da branch de reorganização na branch `main`, unindo a estrutura limpa da main com o conteúdo mais detalhado da branch antiga.
+- Alinhada a narrativa do projeto ao contexto de negócio da **HomeLab Consultoria & Contabilidade** e ao domínio atual **`corp.homelab.ao`**.
+- Reforçado o plano IPAM com a política de atribuição e a estrutura de rede por VLANs.
+- Mantida a navegação principal consistente entre o README e os documentos centrais.
+
 ## [v0.2.1] - 2026-08-09
 
 ### Alterado

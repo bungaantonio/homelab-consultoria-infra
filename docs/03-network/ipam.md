@@ -34,14 +34,22 @@ A infraestrutura atual segue a seguinte lógica:
 | `10.0.30.100` a `10.0.30.200` | DHCP | Estações de trabalho e clientes |
 | `10.0.40.10` | Estático | TrueNAS SCALE (planeado) |
 
-## 5. Regras de utilização
+## 5. Política de atribuição
+
+A política de endereçamento segue três princípios:
+
+- Endereços fixos para serviços críticos e infraestrutura.
+- Endereços dinâmicos para estações de utilizador e dispositivos temporários.
+- Espaço reservado para expansão futura sem necessidade de reconfigurar a estrutura base.
+
+## 6. Regras de utilização
 
 - Os serviços críticos devem manter endereços fixos e estáveis.
 - As estações de utilizador devem usar DHCP para simplificar a gestão diária.
 - Qualquer novo dispositivo com papel operacional deve receber um endereço fixo e ser registado aqui.
 - O espaço reservado deve ser usado apenas com aprovação e documentação.
 
-## 6. Considerações de operação
+## 7. Considerações de operação
 
 Este plano suporta o modelo do laboratório em três áreas principais:
 
@@ -49,7 +57,7 @@ Este plano suporta o modelo do laboratório em três áreas principais:
 - Armazenamento e partilhas: o TrueNAS fica em `10.0.40.10` quando integrado.
 - Utilizadores finais: recebem endereços por DHCP para manter a experiência mais realista.
 
-## 7. Evolução futura
+## 8. Evolução futura
 
 Quando o laboratório evoluir para uma estrutura mais próxima de uma rede corporativa, este plano pode ser expandido para incluir:
 

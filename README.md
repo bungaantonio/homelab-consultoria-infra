@@ -4,17 +4,42 @@ Este repositório documenta um laboratório de estudo para simular uma infraestr
 
 ## O que é este projeto?
 
-É uma referência documental e de aprendizagem para a empresa fictícia **HomeLab Consultoria & Contabilidade**. O objetivo não é representar um ambiente de produção, mas sim demonstrar como uma organização com necessidades reais de contabilidade, fiscalidade, consultoria e gestão pode ser suportada por uma infraestrutura de TI coerente.
+É um projeto de documentação e aprendizagem que descreve a construção de um ambiente corporativo fictício para a empresa **HomeLab Consultoria & Contabilidade**, com necessidades reais de:
 
-## Como está pensado o laboratório
+- rede isolada e controlada;
+- domínio Active Directory;
+- políticas de segurança e GPO;
+- partilhas de ficheiros com controlo de acesso;
+- uma lógica de autorização baseada em grupos;
+- suporte a funções de consultoria, contabilidade, fiscalidade e gestão.
 
-A estrutura do projeto foi organizada em camadas e separa claramente:
+O objetivo principal é demonstrar como uma infraestrutura empresarial pode ser organizada e administrada, mesmo num ambiente de laboratório.
 
-1. rede e conectividade;
-2. identidade e domínio Active Directory;
-3. autorização baseada em grupos;
-4. recursos compartidos e serviços corporativos;
-5. políticas de segurança e hardening.
+## Como foi pensado e construído
+
+A estrutura do projeto foi pensada em camadas para separar claramente:
+
+1. a fundação da rede;
+2. a criação do domínio e da identidade;
+3. a definição de grupos e permissões;
+4. a implementação de recursos como ficheiros e partilhas;
+5. a aplicação de políticas e hardening;
+6. a evolução para funcionalidades mais avançadas.
+
+A filosofia central é separar claramente:
+
+- quem é o utilizador;
+- onde esse utilizador pertence;
+- quais permissões esse utilizador tem sobre um recurso.
+
+## Como funciona o laboratório
+
+O ambiente atual opera com uma base de rede organizada em VLANs e utiliza os seguintes componentes principais:
+
+- **pfSense** como gateway, firewall e ponto de entrada da rede;
+- **Windows Server / Active Directory** como serviço de identidade e DNS interno;
+- **TrueNAS SCALE** como proposta de servidor de ficheiros com integração AD;
+- **GPOs** para aplicar políticas de configuração e segurança.
 
 A lógica de autorização segue o modelo simplificado:
 
@@ -22,29 +47,35 @@ A lógica de autorização segue o modelo simplificado:
 Utilizador → Grupo Global (GG) → Grupo Domain Local (DL) → Recurso
 ```
 
-## Base técnica atual
+## Contexto de negócio e organização
 
-O laboratório atual funciona com os componentes principais abaixo:
+O laboratório foi desenhado para refletir uma organização composta por áreas funcionais distintas:
 
-- **pfSense** como gateway, firewall e ponto de entrada da rede;
-- **Windows Server / Active Directory** como serviço de identidade e DNS interno;
-- **TrueNAS SCALE** como proposta de servidor de ficheiros com integração AD;
-- **GPOs** para aplicar políticas de segurança e configuração.
+- **Consultoria**: apoio a clientes, documentos de projeto e operação diária.
+- **Contabilidade e Fiscalidade**: dados financeiros sensíveis, relatórios e processos internos.
+- **Direção**: necessidade de visão centralizada e controlo operacional.
+- **TI**: administração de identidade, segurança e serviços de infraestrutura.
 
-O domínio principal atual é **`corp.homelab.ao`** e a rede base é organizada em VLANs com foco em separação e controlo.
+Esta separação é refletida na estrutura lógica do domínio e nos grupos de acesso.
 
-## Estado atual do projeto
+## Estrutura do domínio
 
-O projeto já mostra uma base sólida de:
+O domínio principal atual é **`corp.homelab.ao`** e a organização lógica foi pensada para suportar departamentos e políticas por função.
 
-- rede segmentada e documentada;
-- identidade e estrutura lógica no Active Directory;
-- desenho de acesso por grupos e permissões;
-- políticas de segurança base e documentação operacional.
+```text
+corp.homelab.ao
+├── 00_Admin
+├── 01_Users
+├── 02_Computers
+├── 03_Servers
+└── 04_Service_Accounts
+```
 
-A evolução futura foca-se em armazenamento, backups, automação e reforço da segurança.
+## Gestão de rede e endereçamento
 
-## Mapa da documentação
+Para detalhes sobre atribuições e gamas de rede, consulte o [Plano IPAM](docs/03-network/ipam.md).
+
+## Como navegar este repositório
 
 - [docs/00-project-guide.md](docs/00-project-guide.md) — guia principal de leitura do projeto
 - [docs/01-project-overview.md](docs/01-project-overview.md) — contexto de negócio e objetivos
@@ -59,6 +90,17 @@ A evolução futura foca-se em armazenamento, backups, automação e reforço da
 - [docs/identity/active-directory.md](docs/identity/active-directory.md) — desenho técnico do AD DS
 - [docs/network/routing-firewall.md](docs/network/routing-firewall.md) — regras e interfaces do pfSense
 - [docs/storage/storage-design.md](docs/storage/storage-design.md) — desenho do storage
+
+## Estado atual
+
+O projeto já mostra uma base sólida de:
+
+- rede segmentada e documentada;
+- identidade e estrutura lógica no Active Directory;
+- desenho de acesso por grupos e permissões;
+- políticas de segurança base e documentação operacional.
+
+A evolução futura foca-se em armazenamento, backups, automação e reforço da segurança.
 
 ## Licença
 

@@ -23,9 +23,9 @@ O projeto foi construído em camadas para manter a lógica simples e fácil de c
 4. Recursos
    - Integrar serviços como ficheiros e partilhas com controlo de permissões.
 5. Política e segurança
-   - Aplicar GPOs e boas práticas de hardening.
+   - Aplicar GPOs e boas práticas para hardening e controlo administrativo.
 6. Evolução
-   - Expandir a infraestrutura com funcionalidades mais avançadas, como backup, monitorização e automação.
+   - Expandir a infraestrutura com funcionalidades mais avançadas, como impressão, backup, monitorização e automação.
 
 Esta abordagem ajuda a evitar misturar três conceitos diferentes:
 
@@ -35,7 +35,7 @@ Esta abordagem ajuda a evitar misturar três conceitos diferentes:
 
 ---
 
-## 3. Como funciona o laboratório
+## 3. Como ele funciona
 
 O laboratório funciona como um modelo simples de infraestrutura corporativa:
 
@@ -118,6 +118,14 @@ O objetivo final deste projeto é criar uma referência prática e coerente de u
 - serviços de ficheiros operacionais;
 - políticas de segurança aplicadas via GPO;
 - uma estrutura documental que permita compreender e evoluir o laboratório sem perder a consistência.
+
+Para isso, o projeto deve chegar a um estado em que seja possível responder de forma clara a estas perguntas:
+
+- O que é este laboratório?
+- Como está organizado?
+- Que componentes o constituem?
+- Como funciona a lógica de identidade e autorização?
+- Como evoluir para a próxima etapa sem perder a coerência?
 
 ---
 
