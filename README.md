@@ -4,42 +4,17 @@ Este repositório documenta um laboratório de estudo para simular uma infraestr
 
 ## O que é este projeto?
 
-É um projeto de documentação e aprendizagem que descreve a construção de um ambiente corporativo fictício para a empresa **HomeLab Consultoria & Contabilidade**, com necessidades reais de:
+É uma referência documental e de aprendizagem para a empresa fictícia **HomeLab Consultoria & Contabilidade**. O objetivo não é representar um ambiente de produção, mas sim demonstrar como uma organização com necessidades reais de contabilidade, fiscalidade, consultoria e gestão pode ser suportada por uma infraestrutura de TI coerente.
 
-- rede isolada e controlada;
-- domínio Active Directory;
-- políticas de segurança e GPO;
-- partilhas de ficheiros com controlo de acesso;
-- uma lógica de autorização baseada em grupos;
-- suporte a funções de consultoria, contabilidade, fiscalidade e gestão.
+## Como está pensado o laboratório
 
-O objetivo principal é demonstrar como uma infraestrutura empresarial pode ser organizada e administrada, mesmo num ambiente de laboratório.
+A estrutura do projeto foi organizada em camadas e separa claramente:
 
-## Como foi pensado e construído
-
-A estrutura do projeto foi pensada em camadas:
-
-1. Fundação da rede
-2. Criação do domínio e da identidade
-3. Definição de grupos e permissões
-4. Implementação de recursos como ficheiros e partilhas
-5. Aplicação de políticas e hardening
-6. Evolução para funcionalidades mais avançadas
-
-A filosofia central é separar claramente:
-
-- quem é o utilizador;
-- onde esse utilizador pertence;
-- quais permissões esse utilizador tem sobre um recurso.
-
-## Como funciona o laboratório
-
-O ambiente opera na sub-rede `10.0.10.0/24` e utiliza os seguintes componentes principais:
-
-- **pfSense** como gateway, firewall e DHCP
-- **Windows Server / Active Directory** como serviço de identidade e DNS
-- **TrueNAS SCALE** como servidor de ficheiros com integração AD
-- **GPOs** para aplicar políticas de configuração e segurança
+1. rede e conectividade;
+2. identidade e domínio Active Directory;
+3. autorização baseada em grupos;
+4. recursos compartidos e serviços corporativos;
+5. políticas de segurança e hardening.
 
 A lógica de autorização segue o modelo simplificado:
 
@@ -47,57 +22,44 @@ A lógica de autorização segue o modelo simplificado:
 Utilizador → Grupo Global (GG) → Grupo Domain Local (DL) → Recurso
 ```
 
-## Contexto de negócio e organização
+## Base técnica atual
 
-O laboratório foi desenhado para refletir uma organização composta por áreas funcionais distintas:
+O laboratório atual funciona com os componentes principais abaixo:
 
-- **Consultoria**: apoio a clientes, documentos de projeto e operação diária.
-- **Contabilidade e Fiscalidade**: dados financeiros sensíveis, relatórios e processos internos.
-- **Direção**: necessidade de visão centralizada e controlo operacional.
-- **TI**: administração de identidade, segurança e serviços de infraestrutura.
+- **pfSense** como gateway, firewall e ponto de entrada da rede;
+- **Windows Server / Active Directory** como serviço de identidade e DNS interno;
+- **TrueNAS SCALE** como proposta de servidor de ficheiros com integração AD;
+- **GPOs** para aplicar políticas de segurança e configuração.
 
-Esta separação é refletida na estrutura lógica do domínio e nos grupos de acesso.
+O domínio principal atual é **`corp.homelab.ao`** e a rede base é organizada em VLANs com foco em separação e controlo.
 
-## Estrutura do domínio
-
-O domínio principal é `lan.homelab.ao` e a organização lógica foi pensada para suportar departamentos e políticas por função.
-
-```text
-lan.homelab.ao
-├── 00_Admin
-├── 01_Users
-├── 02_Computers
-├── 03_Servers
-└── 04_Service_Accounts
-```
-
-## Gestão de rede e endereçamento
-
-Para detalhes sobre atribuições e gamas de rede, consulte o [Plano IPAM](docs/03-network/ipam.md).
-
-## Como navegar este repositório
-
-- [docs/00-project-guide.md](docs/00-project-guide.md) — guia principal de leitura do projeto
-- [docs/01-project-overview.md](docs/01-project-overview.md) — contexto e objetivo
-- [docs/02-architecture.md](docs/02-architecture.md) — visão geral da arquitetura
-- [docs/03-network.md](docs/03-network.md) — rede e topologia
-- [docs/03-network/ipam.md](docs/03-network/ipam.md) — plano de endereçamento e atribuições
-- [docs/04-active-directory.md](docs/04-active-directory.md) — Active Directory e organização lógica
-- [docs/08-file-services-design.md](docs/08-file-services-design.md) — desenho dos serviços de ficheiros
-- [docs/14-truenas-scale-preparacao-integracao-ad.md](docs/14-truenas-scale-preparacao-integracao-ad.md) — implementação do TrueNAS
-- [docs/13-roadmap.md](docs/13-roadmap.md) — roadmap de evolução do laboratório
-
-## Estado atual
+## Estado atual do projeto
 
 O projeto já mostra uma base sólida de:
 
-- rede e domínios;
-- identidade e estrutura lógica no AD;
-- integração de ficheiros com controlo de acesso;
-- políticas e GPOs base.
+- rede segmentada e documentada;
+- identidade e estrutura lógica no Active Directory;
+- desenho de acesso por grupos e permissões;
+- políticas de segurança base e documentação operacional.
 
-O que ainda está por evoluir inclui segurança avançada, automação, impressão e monitorização.
+A evolução futura foca-se em armazenamento, backups, automação e reforço da segurança.
+
+## Mapa da documentação
+
+- [docs/00-project-guide.md](docs/00-project-guide.md) — guia principal de leitura do projeto
+- [docs/01-project-overview.md](docs/01-project-overview.md) — contexto de negócio e objetivos
+- [docs/02-architecture.md](docs/02-architecture.md) — visão geral da arquitetura
+- [docs/03-network.md](docs/03-network.md) — rede e topologia
+- [docs/03-network/ipam.md](docs/03-network/ipam.md) — plano IPAM e atribuições
+- [docs/04-active-directory.md](docs/04-active-directory.md) — Active Directory e modelo de autorização
+- [docs/05-security.md](docs/05-security.md) — políticas e segurança
+- [docs/06-services.md](docs/06-services.md) — serviços base e serviços corporativos
+- [docs/07-roadmap.md](docs/07-roadmap.md) — evolução prevista do laboratório
+- [docs/architecture/index.md](docs/architecture/index.md) — arquitetura detalhada da versão atual
+- [docs/identity/active-directory.md](docs/identity/active-directory.md) — desenho técnico do AD DS
+- [docs/network/routing-firewall.md](docs/network/routing-firewall.md) — regras e interfaces do pfSense
+- [docs/storage/storage-design.md](docs/storage/storage-design.md) — desenho do storage
 
 ## Licença
 
-Documentação desenvolvida para fins de estudo, laboratório e portfólio de arquitetura de TI.
+Documentação desenvolvida para fins de estudo, laboratório e referência de arquitetura de TI.

@@ -4,7 +4,7 @@
 
 Este repositório documenta um laboratório de estudo para simular uma infraestrutura de TI corporativa pequena e controlada, com foco em identidade, segurança, acesso a recursos e gestão operacional.
 
-A empresa fictícia associada ao laboratório é a HomeLab Consultoria & Contabilidade, uma organização que necessita de um ambiente com utilizadores, departamentos, partilhas de ficheiros, políticas de segurança e controlo de acesso.
+A empresa fictícia associada ao laboratório é a **HomeLab Consultoria & Contabilidade**, uma organização que precisa de um ambiente com utilizadores, departamentos, partilhas de ficheiros, políticas de segurança e controlo de acesso.
 
 O objetivo não é criar um sistema produtivo real, mas sim demonstrar como uma infraestrutura empresarial pode ser organizada e administrada de forma coerente.
 
@@ -12,25 +12,20 @@ O objetivo não é criar um sistema produtivo real, mas sim demonstrar como uma 
 
 ## 2. Como foi pensado
 
-O projeto foi construído em camadas, para manter a lógica simples e fácil de compreender:
+O projeto foi construído em camadas para manter a lógica simples e fácil de compreender:
 
 1. Rede base
    - Definir a topologia e os serviços básicos de rede.
-
 2. Identidade e organização
    - Criar um domínio Active Directory com utilizadores, grupos e OUs.
-
 3. Autorização
    - Separar identidade de acesso, usando grupos globais e grupos domain local.
-
 4. Recursos
    - Integrar serviços como ficheiros e partilhas com controlo de permissões.
-
 5. Política e segurança
-   - Aplicar GPOs e boas práticas para hardening e controlo administrativo.
-
+   - Aplicar GPOs e boas práticas de hardening.
 6. Evolução
-   - Expandir a infraestrutura com funcionalidades mais avançadas, como impressão, LAPS, AD Recycle Bin e monitorização.
+   - Expandir a infraestrutura com funcionalidades mais avançadas, como backup, monitorização e automação.
 
 Esta abordagem ajuda a evitar misturar três conceitos diferentes:
 
@@ -40,19 +35,19 @@ Esta abordagem ajuda a evitar misturar três conceitos diferentes:
 
 ---
 
-## 3. Como ele funciona
+## 3. Como funciona o laboratório
 
-O laboratório funciona como um modelo simples de infraestrutra corporativa:
+O laboratório funciona como um modelo simples de infraestrutura corporativa:
 
 ### 3.1 Rede
 
-- O ambiente opera numa rede isolada na sub-rede `10.0.10.0/24`.
-- O pfSense atua como gateway, firewall e DHCP.
+- O ambiente opera numa rede isolada e segmentada em VLANs.
+- O pfSense atua como gateway, firewall e ponto de entrada da rede.
 - O Domain Controller fornece DNS e autenticação interna.
 
 ### 3.2 Identidade
 
-- O domínio principal é `lan.homelab.ao`.
+- O domínio principal é **`corp.homelab.ao`**.
 - O Active Directory organiza utilizadores, computadores e contas de serviço.
 - As OUs definem a estrutura lógica e o contexto para políticas.
 
@@ -72,7 +67,7 @@ Utilizador → GG → DL → Recurso
 
 ### 3.4 Recursos
 
-- O TrueNAS SCALE funciona como servidor de ficheiros.
+- O TrueNAS SCALE funciona como proposta de servidor de ficheiros.
 - As partilhas SMB e os ACLs permitem controlo de acesso por departamento.
 - As GPOs aplicam configurações automáticas aos computadores e utilizadores.
 
@@ -89,14 +84,14 @@ Utilizador → GG → DL → Recurso
 Se a ideia for entender o projeto sem se perder, a leitura ideal é esta:
 
 1. [README.md](../README.md) — resumo rápido do projeto.
-2. [docs/01-project-overview.md](01-project-overview.md) — contexto e objetivo.
+2. [docs/01-project-overview.md](01-project-overview.md) — contexto de negócio e objetivo.
 3. [docs/02-architecture.md](02-architecture.md) — visão geral da arquitetura.
 4. [docs/03-network.md](03-network.md) — rede e topologia.
 5. [docs/03-network/ipam.md](03-network/ipam.md) — plano de endereçamento e atribuições.
 6. [docs/04-active-directory.md](04-active-directory.md) — Active Directory e modelo lógico.
-7. [docs/08-file-services-design.md](08-file-services-design.md) — desenho dos serviços de ficheiros.
-8. [docs/14-truenas-scale-preparacao-integracao-ad.md](14-truenas-scale-preparacao-integracao-ad.md) — implementação do TrueNAS.
-9. [docs/13-roadmap.md](13-roadmap.md) — evolução prevista do laboratório.
+7. [docs/05-security.md](05-security.md) — políticas de segurança e hardening.
+8. [docs/06-services.md](06-services.md) — serviços base e corporativos.
+9. [docs/07-roadmap.md](07-roadmap.md) — evolução prevista do laboratório.
 
 ---
 
@@ -106,10 +101,10 @@ O projeto está num estado de laboratório de estudo e documentação, com:
 
 - base de rede e domínio bem definidas;
 - Active Directory e estrutura lógica documentadas;
-- file services com integração AD já descritos;
-- segurança avançada, automação e evolução futura ainda em aberto.
+- serviços de ficheiros e integração AD já descritos em termos de desenho;
+- segurança e políticas base já estruturadas.
 
-Em termos práticos, o projeto já mostra o desenho da infraestrutura, mas ainda está a evoluir para se tornar mais completo e operacional.
+Em termos práticos, o projeto já mostra o desenho da infraestrutura e a direção da evolução.
 
 ---
 
@@ -124,40 +119,9 @@ O objetivo final deste projeto é criar uma referência prática e coerente de u
 - políticas de segurança aplicadas via GPO;
 - uma estrutura documental que permita compreender e evoluir o laboratório sem perder a consistência.
 
-Para isso, o projeto deve chegar a um estado em que seja possível responder, de forma clara, a estas perguntas:
-
-- O que é este laboratório?
-- Como está organizado?
-- Que componentes o constituem?
-- Como funciona a lógica de identidade e autorização?
-- Como evoluir para a próxima etapa sem perder a coerência?
-
-Em termos simples, quer-se chegar a um laboratório que seja:
-
-- fácil de compreender;
-- fácil de explicar;
-- fácil de evoluir;
-- e suficientemente bem documentado para servir de base de estudo e demonstração.
-
 ---
 
-## 7. Estado desejado do projeto
-
-O projeto considera-se num estado desejado quando:
-
-- a arquitetura geral está bem explicada e compreensível;
-- a topologia da rede está clara;
-- o domínio Active Directory está bem definido;
-- o modelo de grupos e permissões está consistente;
-- os serviços de ficheiros e a integração AD estão documentados de forma objetiva;
-- o roadmap distingue claramente entre o que está concluído e o que é evolução futura;
-- a documentação permite a alguém novo entender o projeto sem precisar de reconstruir tudo do zero.
-
-Neste ponto, o laboratório deixa de ser apenas uma coleção de ideias e passa a ser uma referência estruturada de estudo.
-
----
-
-## 8. O que este projeto não é
+## 7. O que este projeto não é
 
 Este repositório não é:
 
