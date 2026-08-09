@@ -2,7 +2,7 @@
 
 ## 1. Papel do Documento
 
-Este ficheiro serve como nota complementar ao runbook principal em [14 - TrueNAS SCALE 25.10.4 - File Server Integration with Active Directory](docs/14-truenas-scale-preparacao-integracao-ad.md).
+Este ficheiro serve como nota complementar ao runbook principal em [14 - TrueNAS SCALE 25.10.4 - File Server Integration with Active Directory](14-truenas-scale-preparacao-integracao-ad.md).
 
 O capítulo 14 contém o procedimento fechado e validado. Este documento existe apenas para consolidar decisões de implementação sem repetir instruções operacionais.
 

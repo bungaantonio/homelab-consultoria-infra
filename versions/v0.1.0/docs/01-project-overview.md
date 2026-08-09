@@ -2,7 +2,9 @@
 
 ## 1. Contexto do Projeto
 
-Este projeto representa a conceção e implementação de uma infraestrutura de TI corporativa simulada para a organização fictícia **HomeLab Consultoria & Contabilidade**, orientada a serviços fiscais e auditoria financeira para PME.
+Este projeto representa a conceção e implementação de uma infraestrutura de TI corporativa simulada para a organização fictícia **HomeLab Consultoria & Contabilidade**, orientada a serviços de consultoria, contabilidade, fiscalidade e auditoria para PME.
+
+A empresa fictícia combina dois eixos de atividade: apoio operacional a clientes e gestão de informação financeira sensível. Por isso, o laboratório foi desenhado para refletir uma organização com necessidades reais de controlo de acesso, separação funcional, segurança de dados e gestão centralizada de identidade.
 
 O ambiente foi desenhado para refletir práticas reais de administração de sistemas em pequenas organizações, com foco em centralização de identidade, segurança, controlo de acesso e gestão de infraestrutura.
 
